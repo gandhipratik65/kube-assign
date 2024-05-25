@@ -27,9 +27,17 @@ spec:
       containers:
         - name: backend  # Name of the main application container
           image: gandhipratik65/backend:v1  # Docker image for the main application container
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
           ports:
             - name: http-server  # Name of the port
               containerPort: 8080  # Container port to expose
+              
           env:
             - name: PORT
               valueFrom:
