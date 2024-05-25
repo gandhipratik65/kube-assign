@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb  # Name of the Service
+  labels:
+    app: mongodb  # Label to identify the Service
+spec:
+  clusterIP: None  # This creates a headless service, which is required for mongodb StatefulSets
+  selector:
+    app: mongodb  # Selector to identify the mongodb pods
+  ports:
+    - port: 27017  # Port that the service will expose
+      targetPort: 27017  # Port on the pod that the service will forward traffic to

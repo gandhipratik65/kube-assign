@@ -1,0 +1,103 @@
+# EmployeeBook Backend Deployment with Horizontal Pod Autoscaler
+
+This repository contains Kubernetes configurations for deploying the EmployeeBook backend application, along with a horizontal pod autoscaler that scales the deployment based on CPU and memory utilization. Additionally, it includes configurations for setting up MongoDB with a secret, StatefulSet, and headless service.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [MongoDB Secret](#mongodb-secret)
+- [MongoDB StatefulSet](#mongodb-statefulset)
+- [MongoDB Headless Service](#mongodb-headless-service)
+- [Deployment](#deployment)
+- [Service](#service)
+- [Horizontal Pod Autoscaler](#horizontal-pod-autoscaler)
+- [Java Controller](#java-controller)
+- [How to Run](#how-to-run)
+
+## Overview
+
+This project includes the following components:
+- Architecture diagram
+- A Secret to manage MongoDB credentials.
+- A StatefulSet to manage MongoDB.
+- A headless Service to enable communication with MongoDB StatefulSet.
+- A Kubernetes Deployment for the backend application.
+- A Service to expose the backend application.
+- A Horizontal Pod Autoscaler to scale the deployment based on CPU and memory utilization.
+- A Java Spring Boot application with an endpoint to increase memory usage.
+
+## Architecture diagram
+
+[Architecture Diagram](./img/architecture.png)
+
+## MongoDB Secret
+
+The `Secret` object stores MongoDB credentials securely. These credentials are referenced in the MongoDB StatefulSet and the backend Deployment.
+
+## MongoDB StatefulSet
+
+The `StatefulSet` object manages the deployment and scaling of MongoDB pods. It ensures the pods are deployed in a specific order and maintains a stable network identity for each pod.
+
+## MongoDB Headless Service
+
+The headless `Service` allows the MongoDB StatefulSet to be discoverable within the Kubernetes cluster without creating a load balancer.
+
+## Deployment
+
+The `Deployment` object defines the EmployeeBook backend application deployment. It includes an initialization container to wait for MongoDB to be ready before starting the backend container. The deployment uses a rolling update strategy to ensure zero downtime during updates.
+
+## Service
+
+The `Service` object exposes the backend application via a LoadBalancer, making it accessible outside the Kubernetes cluster.
+
+## Horizontal Pod Autoscaler
+
+The `HorizontalPodAutoscaler` object scales the backend deployment based on CPU and memory utilization. It monitors the average utilization of CPU and memory and adjusts the number of replicas within the specified range (1 to 3 replicas).
+
+## Java Controller
+
+The Java application includes a Spring Boot controller to stress memory for testing the autoscaler. The controller has an endpoint that, when accessed, performs operations that increase memory usage and keep the CPU busy for a specified duration.
+
+## How to Run
+
+1. **Create the MongoDB secret**: Apply the secret YAML file.
+    ```sh
+    kubectl apply -f mongodb-secret.yaml
+    ```
+
+2. **Deploy the MongoDB StatefulSet**: Apply the statefulset YAML file.
+    ```sh
+    kubectl apply -f mongodb-statefulset.yaml
+    ```
+
+3. **Expose MongoDB with a headless service**: Apply the service YAML file.
+    ```sh
+    kubectl apply -f mongodb-headless-svc.yaml
+    ```
+
+4. **Deploy the backend application**: Apply the deployment YAML file.
+    ```sh
+    kubectl apply -f employee-backend.deployment.yaml
+    ```
+
+5. **Expose the backend application**: Apply the service YAML file.
+    ```sh
+    kubectl apply -f employee-backend.service.yaml
+    ```
+
+6. **Set up the autoscaler**: Apply the autoscaler YAML file.
+    ```sh
+    kubectl apply -f employee-horizontalAutoScaler.yaml
+    ```
+
+7. **Run the Spring Boot application**: Ensure your Java application is set up and run it using:
+    ```sh
+    mvn spring-boot:run
+    ```
+
+8. **Trigger the memory stress test**: Access the endpoint to increase memory usage.
+    ```sh
+    curl http://localhost:8080/memory/stress
+    ```
+
+By following these steps, you can set up MongoDB, deploy the EmployeeBook backend application, expose it, and set up a horizontal pod autoscaler to manage scaling based on CPU and memory utilization metrics.

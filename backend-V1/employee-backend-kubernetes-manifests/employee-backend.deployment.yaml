@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-employeebook-backend  # Name of the Deployment
+  labels:
+    app: java-employeebook  # Label for the application
+    tier: backend  # Label for the tier of the application
+spec:
+  replicas: 3  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: java-employeebook  # Label selector to match pods
+      tier: backend  # Tier label to match pods
+  template:
+    metadata:
+      labels:
+        app: java-employeebook  # Labels for the pods
+        tier: backend  # Tier label for the pods
+    spec:
+      initContainers:
+        - name: init-db-ready  # Name of the init container
+          image: mongo:4  # Docker image for the init container
+          command: ['/bin/sh', '-c']  # Command to run in the init container
+          args:
+            - echo "Waiting for mongodb at java-employeebook-mongodb:27017 to go live before the BE...";  # Message to print
+            - until (mongo --host java-employeebook-mongodb:27017 >/dev/null) do echo "Waiting for connection for 2 sec."; sleep 2; done  # Wait for MongoDB to be ready
+      containers:
+        - name: backend  # Name of the main application container
+          image: gandhipratik65/backend:v1  # Docker image for the main application container
+          ports:
+            - name: http-server  # Name of the port
+              containerPort: 8080  # Container port to expose
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:  # Reference to the configmap for port
+                  name: backend-config
+                  key: port
+            - name: EMPLOYEE_DB_ADDR
+              valueFrom:
+                configMapKeyRef:  # Reference to the configmap for connection url
+                  name: backend-config
+                  key: connection-url
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret  # Reference to the secret for the username
+                  key: username  # Key within the secret
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret  # Reference to the secret for the password
+                  key: password  # Key within the secret
+            # This environment variable enables debugging support for the container.
+            # Remove this to disable the debug build.
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y  # Java debugging options

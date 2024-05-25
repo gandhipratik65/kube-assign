@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb  # Name of the StatefulSet
+spec:
+  selector:
+    matchLabels:
+      app: mongodb  # Label to identify pods managed by this StatefulSet
+  serviceName: mongodb  # Service to manage network identity
+  template:
+    metadata:
+      labels:
+        app: mongodb  # Label to match the selector
+    spec:
+      containers:
+        - name: mongodb  # Name of the container
+          image: mongo:4  # MongoDB image to use
+          ports:
+            - containerPort: 27017  # Port MongoDB will listen on
+              name: web  # Name of the port
+          volumeMounts:
+            - name: pvc  # Name of the volume to mount
+              mountPath: /data/db  # Path inside the container where the volume will be mounted
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME  # Environment variable for MongoDB root username
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret  # Reference to the secret containing the username
+                  key: username  # Key within the secret
+            - name: MONGO_INITDB_ROOT_PASSWORD  # Environment variable for MongoDB root password
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret  # Reference to the secret containing the password
+                  key: password  # Key within the secret
+  volumeClaimTemplates:
+    - metadata:
+        name: pvc  # Name of the PersistentVolumeClaim
+      spec:
+        accessModes: [ "ReadWriteOnce" ]  # Access mode for the volume
+        resources:
+          requests:
+            storage: 1Gi  # Storage request for the volume

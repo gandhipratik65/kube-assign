@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-employeebook-backend  # Name of the Service
+  labels:
+    app: java-employeebook  # Label for the application
+    tier: backend  # Label for the tier of the application
+spec:
+  type: LoadBalancer  # Service type to create an external load balancer
+  selector:
+    app: java-employeebook  # Label selector to identify pods that this service applies to
+    tier: backend  # Tier label to identify pods that this service applies to
+  ports:
+    - port: 80  # Port that the service will expose
+      targetPort: http-server  # Target port on the pod that the service will forward traffic to
+
