@@ -12,7 +12,7 @@ public class CpuController {
     public String stressCpu() {
         long start = System.currentTimeMillis();
         // Run a CPU-intensive task for a certain period
-        while (System.currentTimeMillis() - start < 10000) { // 10 seconds
+        while (System.currentTimeMillis() - start < 10) { 
             double x = Math.random();
             for (int i = 0; i < 1000000; i++) {
                 x = Math.sin(x);
