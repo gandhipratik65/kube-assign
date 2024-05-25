@@ -74,12 +74,12 @@ The Java application includes a Spring Boot controller to stress memory for test
     ```sh
     kubectl apply -f kube-backend/mongodb-kubernets-manifest/mongodb-headless-svc.yaml
     ```
-    
+
 4. **Create ConfigMap**: Apply the config map YAML file.
     ```sh
      kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-configmap.yaml
     ```
-    
+
 5. **Deploy the backend application**: Apply the deployment YAML file.
     ```sh
     kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-backend.deployment.yaml
@@ -95,7 +95,7 @@ The Java application includes a Spring Boot controller to stress memory for test
      kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-horizontalAutoScaler.yaml 
     ```
 
-8. **MongoDB Command**: Set up user 
+8. **MongoDB Command**: Set up user
     ```sh
     kubectl run -it mongo-shell --image=mongo:4 --rm  -- /bin/bash
     mongo mongodb-0.mongodb
@@ -112,9 +112,9 @@ The Java application includes a Spring Boot controller to stress memory for test
     db.employee.find();
     ```
 
-9. **Trigger the memory stress test**: Access the endpoint to increase memory usage.
+9. **Rolling Update v2**:
     ```sh
-    curl http://localhost:8080/memory/stress
+    kubectl apply -f kube-backend/backend-V2/employee-backend-kubernetes-manifests/employee-backend-v2.deployment.yaml
     ```
 
 By following these steps, you can set up MongoDB, deploy the EmployeeBook backend application, expose it, and set up a horizontal pod autoscaler to manage scaling based on CPU and memory utilization metrics.

@@ -6,7 +6,7 @@ metadata:
     app: java-employeebook  # Label for the application
     tier: backend  # Label for the tier of the application
 spec:
-  replicas: 1  # Number of pod replicas
+  replicas: 2  # Number of pod replicas
   selector:
     matchLabels:
       app: java-employeebook  # Label selector to match pods
@@ -32,6 +32,13 @@ spec:
       containers:
         - name: backend  # Name of the main application container
           image: gandhipratik65/backend:v2  # Docker image for the main application container
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
           ports:
             - name: http-server  # Name of the port
               containerPort: 8080  # Container port to expose
