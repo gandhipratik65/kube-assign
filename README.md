@@ -28,7 +28,7 @@ This project includes the following components:
 
 ## Architecture diagram
 
-[Architecture Diagram](./img/architecture.png)
+![Architecture Diagram](./img/architecture.png)
 
 ## MongoDB Secret
 
