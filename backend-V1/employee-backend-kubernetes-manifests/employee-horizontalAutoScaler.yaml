@@ -22,7 +22,6 @@ spec:
         target:  # Target specification
           type: Utilization  # Target type (utilization percentage)
           averageUtilization: 80  # Target average utilization percentage for memory
-           behavior:
   behavior:
     scaleDown:
       policies:
