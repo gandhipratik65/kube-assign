@@ -56,7 +56,7 @@ The `HorizontalPodAutoscaler` object scales the backend deployment based on CPU 
 
 ## Java Controller
 
-The Java application includes a Spring Boot controller to stress memory for testing the autoscaler. The controller has an endpoint that, when accessed, performs operations that increase memory usage and keep the CPU busy for a specified duration.
+The Java application includes a Spring Boot controller to stress cpu/memory for testing the autoscaler. The controller has an endpoint that, when accessed, performs operations that increase cpu/memory usage and keep the CPU busy for a specified duration.
 
 ## How to Run
 
