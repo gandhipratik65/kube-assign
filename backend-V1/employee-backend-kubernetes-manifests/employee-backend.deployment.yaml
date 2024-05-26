@@ -29,11 +29,11 @@ spec:
           image: gandhipratik65/backend:v1  # Docker image for the main application container
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: "256Mi"
+              cpu: "100m"
             limits:
-              memory: "1024Mi"
-              cpu: "500m"
+              memory: "512Mi"
+              cpu: "200m"
           ports:
             - name: http-server  # Name of the port
               containerPort: 8080  # Container port to expose
