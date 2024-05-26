@@ -62,40 +62,45 @@ The Java application includes a Spring Boot controller to stress memory for test
 
 1. **Create the MongoDB secret**: Apply the secret YAML file.
     ```sh
-    kubectl apply -f mongodb-secret.yaml
+    kubectl apply -f kube-backend/mongodb-kubernets-manifest/mongodb-secret.yaml 
     ```
 
 2. **Deploy the MongoDB StatefulSet**: Apply the statefulset YAML file.
     ```sh
-    kubectl apply -f mongodb-statefulset.yaml
+    kubectl apply -f kube-backend/mongodb-kubernets-manifest/mongodb-statuefulset.yaml
     ```
 
 3. **Expose MongoDB with a headless service**: Apply the service YAML file.
     ```sh
-    kubectl apply -f mongodb-headless-svc.yaml
+    kubectl apply -f kube-backend/mongodb-kubernets-manifest/mongodb-headless-svc.yaml
     ```
-
-4. **Deploy the backend application**: Apply the deployment YAML file.
+    
+4. **Create ConfigMap**: Apply the config map YAML file.
     ```sh
-    kubectl apply -f employee-backend.deployment.yaml
+     kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-configmap.yaml
     ```
-
-5. **Expose the backend application**: Apply the service YAML file.
+    
+5. **Deploy the backend application**: Apply the deployment YAML file.
     ```sh
-    kubectl apply -f employee-backend.service.yaml
+    kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-backend.deployment.yaml
     ```
 
-6. **Set up the autoscaler**: Apply the autoscaler YAML file.
+6. **Expose the backend application**: Apply the service YAML file.
     ```sh
-    kubectl apply -f employee-horizontalAutoScaler.yaml
+    kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-backend.service.yaml
     ```
 
-7. **Run the Spring Boot application**: Ensure your Java application is set up and run it using:
+7. **Set up the autoscaler**: Apply the autoscaler YAML file.
+    ```sh
+     kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-horizontalAutoScaler.yaml 
+    ```
+
+8. **Run the Spring Boot application**: Ensure your Java application is set up and run it using:
     ```sh
     mvn spring-boot:run
     ```
 
-8. **Trigger the memory stress test**: Access the endpoint to increase memory usage.
+9. **Trigger the memory stress test**: Access the endpoint to increase memory usage.
     ```sh
     curl http://localhost:8080/memory/stress
     ```
