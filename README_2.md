@@ -95,9 +95,21 @@ The Java application includes a Spring Boot controller to stress memory for test
      kubectl apply -f kube-backend/backend-V1/employee-backend-kubernetes-manifests/employee-horizontalAutoScaler.yaml 
     ```
 
-8. **Run the Spring Boot application**: Ensure your Java application is set up and run it using:
+8. **MongoDB Command**: Set up user 
     ```sh
-    mvn spring-boot:run
+    kubectl run -it mongo-shell --image=mongo:4 --rm  -- /bin/bash
+    mongo mongodb-0.mongodb
+    use admin;
+    db.createUser(
+    {
+    user: "mongoadmin",
+    pwd: "password123",
+    roles: [ { role: "readWrite", db: "employeebook" } ]
+      }
+    )
+    mongo mongodb-0.mongodb  -u "mongoadmin" -p password123 --authenticationDatabase "admin"
+    use employeeBook;
+    db.employee.find();
     ```
 
 9. **Trigger the memory stress test**: Access the endpoint to increase memory usage.
