@@ -22,5 +22,12 @@ spec:
         target:  # Target specification
           type: Utilization  # Target type (utilization percentage)
           averageUtilization: 80  # Target average utilization percentage for memory
+           behavior:
+  behavior:
+    scaleDown:
+      policies:
+        - type: Percent  # Specifies scaling based on percentage
+          value: 20  # Scale down by 20% when CPU utilization decreases
+          periodSeconds: 300  # Evaluate every 5 minutes
 
 
