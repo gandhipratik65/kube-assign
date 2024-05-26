@@ -98,8 +98,8 @@ The Java application includes a Spring Boot controller to stress cpu/memory for 
 8. **MongoDB Command**: Set up user
     ```sh
     kubectl run -it mongo-shell --image=mongo:4 --rm  -- /bin/bash
-    mongo mongodb-0.mongodb
-    use admin;
+    mongo mongodb-0.mongodb  -u "mongoadmin" -p password123 --authenticationDatabase "admin"
+    use employeeBook;
     db.createUser(
     {
     user: "mongoadmin",
@@ -107,8 +107,8 @@ The Java application includes a Spring Boot controller to stress cpu/memory for 
     roles: [ { role: "readWrite", db: "employeebook" } ]
       }
     )
-    mongo mongodb-0.mongodb  -u "mongoadmin" -p password123 --authenticationDatabase "admin"
-    use employeeBook;
+    
+    
     db.employee.find();
     ```
 
@@ -123,6 +123,8 @@ By following these steps, you can set up MongoDB, deploy the EmployeeBook backen
 ## Docker image endpoint
 
 https://hub.docker.com/repository/docker/gandhipratik65/backend/tags
+
 https://hub.docker.com/layers/gandhipratik65/backend/v1/images/sha256-182bed0f7e3ebbff58c3082282fba9672b08c8431c87f358c6c649b3c4d5ba13?context=repo
+
 https://hub.docker.com/layers/gandhipratik65/backend/v2/images/sha256-aa7b9a98f79c63c8f87dd98ca1e82935f3d5e53d52772f5d3edb103a4fece3ac?context=repo
 
