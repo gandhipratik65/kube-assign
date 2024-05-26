@@ -116,5 +116,13 @@ The Java application includes a Spring Boot controller to stress memory for test
     ```sh
     kubectl apply -f kube-assign/backend-V2/employee-backend-kubernetes-manifests/employee-backend-v2.deployment.yaml
     ```
+    
 
 By following these steps, you can set up MongoDB, deploy the EmployeeBook backend application, expose it, and set up a horizontal pod autoscaler to manage scaling based on CPU and memory utilization metrics.
+
+## Docker image endpoint
+
+https://hub.docker.com/repository/docker/gandhipratik65/backend/tags
+https://hub.docker.com/layers/gandhipratik65/backend/v1/images/sha256-182bed0f7e3ebbff58c3082282fba9672b08c8431c87f358c6c649b3c4d5ba13?context=repo
+https://hub.docker.com/layers/gandhipratik65/backend/v2/images/sha256-aa7b9a98f79c63c8f87dd98ca1e82935f3d5e53d52772f5d3edb103a4fece3ac?context=repo
+
