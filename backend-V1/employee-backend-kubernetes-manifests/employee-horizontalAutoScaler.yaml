@@ -27,7 +27,12 @@ spec:
     scaleDown:
       policies:
         - type: Percent  # Specifies scaling based on percentage
-          value: 20  # Scale down by 20% when CPU utilization decreases
-          periodSeconds: 300  # Evaluate every 5 minutes
+          value: 50  # Scale down by 50% when CPU utilization decreases
+          periodSeconds: 30  # Evaluate every 30 seconds
+    scaleUp:
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 30
 
 
