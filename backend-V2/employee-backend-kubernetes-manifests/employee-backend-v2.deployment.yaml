@@ -6,7 +6,7 @@ metadata:
     app: java-employeebook  # Label for the application
     tier: backend  # Label for the tier of the application
 spec:
-  replicas: 2  # Number of pod replicas
+  replicas: 3  # Number of pod replicas
   selector:
     matchLabels:
       app: java-employeebook  # Label selector to match pods
