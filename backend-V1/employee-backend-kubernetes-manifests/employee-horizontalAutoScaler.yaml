@@ -15,7 +15,7 @@ spec:
         name: cpu  # Resource to monitor (CPU)
         target:  # Target specification
           type: Utilization  # Target type (utilization percentage)
-          averageUtilization: 50  # Target average utilization percentage
+          averageUtilization: 70  # Target average utilization percentage
     - type: Resource  # Type of metric (resource-based)
       resource:  # Resource metric specification
         name: memory  # Resource to monitor (Memory)
