@@ -24,10 +24,7 @@ spec:
           averageUtilization: 80  # Target average utilization percentage for memory
   behavior:
     scaleDown:
-      policies:
-        - type: Pods  
-          value: 1 
-          periodSeconds: 30  # Evaluate every 30 seconds
+      stabilizationWindowSeconds: 10
     scaleUp:
       policies:
         - type: Pods
