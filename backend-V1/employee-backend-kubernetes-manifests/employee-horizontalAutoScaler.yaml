@@ -7,8 +7,8 @@ spec:
     apiVersion: apps/v1  # API version of the target resource
     kind: Deployment  # Kind of the target resource
     name: java-employeebook-backend  # Name of the target resource (Deployment)
-  minReplicas: 2  # Minimum number of pod replicas
-  maxReplicas: 4  # Maximum number of pod replicas
+  minReplicas: 3  # Minimum number of pod replicas
+  maxReplicas: 5  # Maximum number of pod replicas
   metrics:  # Metrics to use for scaling
     - type: Resource  # Type of metric (resource-based)
       resource:  # Resource metric specification
