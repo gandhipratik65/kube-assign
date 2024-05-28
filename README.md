@@ -120,6 +120,18 @@ The Java application includes a Spring Boot controller to stress cpu/memory for 
 
 By following these steps, you can set up MongoDB, deploy the EmployeeBook backend application, expose it, and set up a horizontal pod autoscaler to manage scaling based on CPU and memory utilization metrics.
 
+# Source Code for the project. 
+https://github.com/gandhipratik65/kube-assign/tree/master
+
+# All Kubernetes YAML files used in the assignment.
+https://github.com/gandhipratik65/kube-assign/tree/master/mongodb-kubernets-manifest
+https://github.com/gandhipratik65/kube-assign/tree/master/backend-V1/employee-backend-kubernetes-manifests
+https://github.com/gandhipratik65/kube-assign/tree/master/backend-V2/employee-backend-kubernetes-manifests
+
+# Dockerfile 
+https://github.com/gandhipratik65/kube-assign/blob/master/backend-V1/Dockerfile
+https://github.com/gandhipratik65/kube-assign/blob/master/backend-V2/Dockerfile
+
 ## Docker image endpoint
 
 https://hub.docker.com/repository/docker/gandhipratik65/backend/tags
