@@ -125,11 +125,14 @@ https://github.com/gandhipratik65/kube-assign/tree/master
 
 # All Kubernetes YAML files used in the assignment.
 https://github.com/gandhipratik65/kube-assign/tree/master/mongodb-kubernets-manifest
+
 https://github.com/gandhipratik65/kube-assign/tree/master/backend-V1/employee-backend-kubernetes-manifests
+
 https://github.com/gandhipratik65/kube-assign/tree/master/backend-V2/employee-backend-kubernetes-manifests
 
 # Dockerfile 
 https://github.com/gandhipratik65/kube-assign/blob/master/backend-V1/Dockerfile
+
 https://github.com/gandhipratik65/kube-assign/blob/master/backend-V2/Dockerfile
 
 ## Docker image endpoint
@@ -139,4 +142,8 @@ https://hub.docker.com/repository/docker/gandhipratik65/backend/tags
 https://hub.docker.com/layers/gandhipratik65/backend/v1/images/sha256-182bed0f7e3ebbff58c3082282fba9672b08c8431c87f358c6c649b3c4d5ba13?context=repo
 
 https://hub.docker.com/layers/gandhipratik65/backend/v2/images/sha256-aa7b9a98f79c63c8f87dd98ca1e82935f3d5e53d52772f5d3edb103a4fece3ac?context=repo
+
+# Video link
+
+https://drive.google.com/file/d/1yds8HJQByUPPvAAgB2aMRMlJgUoQgr6D/view?usp=drive_link
 
